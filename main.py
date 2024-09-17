@@ -36,8 +36,9 @@ def search_pattern(pattern: str, file: str, is_regex: bool) -> Generator[str, st
         if is_regex:
             for line in file_data:
                 match = re.search(pattern, line)
-                if match is not None:
-                    yield line
+                if match is None:
+                    continue
+                yield line
         else:
             for line in file_data:
                 if not pattern in line:
